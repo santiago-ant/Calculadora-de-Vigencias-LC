@@ -19,6 +19,26 @@ document.getElementById('calculateBtn').addEventListener('click', function() {
     let expiryDate = new Date(issueDate); // Fecha de vencimiento calculada
     let ruleApplied = ''; // Variable para guardar la regla aplicada
 
+    // Reglas específicas para menores de 16 años
+    if (ageAtIssue < 16) {
+        alert('No se permite emitir licencias para menores de 16 años.');
+        return;
+    }
+
+    // Reglas específicas para solicitantes de 16 años
+    if (ageAtIssue === 16 && category !== 'A') {
+        alert('A los 16 años solo se permite la categoría A.');
+        return;
+    }
+
+    // Reglas específicas para mayores de 65 años con categorías profesionales
+    if (ageAtIssue >= 65 && (category === 'C' || category === 'D' || category === 'E')) {
+        if (!isRenewal) {
+            alert('No se pueden emitir nuevas licencias profesionales (C, D, E) a partir de los 65 años. Solo renovaciones están permitidas.');
+            return;
+        }
+    }
+
     // Aplica reglas específicas para menores de 18 años
     if (ageAtIssue < 18) {
         if (category === 'A' || category === 'B') {
@@ -85,7 +105,7 @@ document.getElementById('calculateBtn').addEventListener('click', function() {
     document.getElementById('expiryDate').textContent = `Fecha de vencimiento: ${expiryDate.toLocaleDateString('es-ES')}`;
     // Muestra la regla aplicada según las condiciones del solicitante
     document.getElementById('ruleApplied').textContent = `Regla aplicada: ${ruleApplied}`;
-})
+});
 
 // Agrega un mensaje de autor al diseño
 const footer = document.createElement('footer');
