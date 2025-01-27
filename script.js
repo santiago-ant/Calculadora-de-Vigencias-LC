@@ -86,3 +86,13 @@ document.getElementById('calculateBtn').addEventListener('click', function() {
     // Muestra la regla aplicada según las condiciones del solicitante
     document.getElementById('ruleApplied').textContent = `Regla aplicada: ${ruleApplied}`;
 })
+
+// Agrega un mensaje de autor al diseño
+const footer = document.createElement('footer');
+footer.textContent = 'By Lucas Antunez ACTySSL';
+footer.style.marginTop = '20px';
+footer.style.fontSize = '0.9rem';
+footer.style.color = '#555';
+footer.style.textAlign = 'center';
+footer.style.padding = '10px';
+document.body.appendChild(footer);
